@@ -2,7 +2,8 @@
 #define INFO_PROFILE_H
 
 #include <QMainWindow>
-
+#include <QtWidgets>
+#include <QDebug>
 namespace Ui {
 class info_profile;
 }

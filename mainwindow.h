@@ -4,6 +4,14 @@
 #include <QMainWindow>
 #include "info_profile.h"
 #include "windows_reg.h"
+#include <QtWidgets>
+#include <QDebug>
+
+/* Defining */
+#define ORGANIZATION_NAME "Monsters, Inc"
+#define ORGANIZATION_DOMAIN "Monsters.com"
+#define APPLICATION_NAME "Monsters"
+#define SETTINGS_TRAY "settings/tray"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;

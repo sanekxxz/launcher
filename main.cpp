@@ -1,12 +1,18 @@
 #include "mainwindow.h"
+#include "main.h"
 #include <QApplication>
 #include "QMessageBox"
-#include "QSqlQuery"
 bool createConnection();
+QString generateHWID();
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     createConnection();
+    //QString hwid = generateHWID();
+    //qDebug() << "HWID: в main" << hwid;
+    QCoreApplication::setOrganizationName("Monsters, Inc");
+    QCoreApplication::setOrganizationDomain("Monsters.com");
+    QCoreApplication::setApplicationName("Monsters");
     MainWindow w;
     w.show();
     return a.exec();
@@ -39,4 +45,17 @@ bool createConnection()
         return true;
     }
     //db.close();
+}
+QString generateHWID()
+{
+    QString hwidInput;
+    hwidInput += QSysInfo::machineHostName();
+    hwidInput += QSysInfo::machineUniqueId();
+    hwidInput += QSysInfo::kernelType();
+    hwidInput += QSysInfo::kernelVersion();
+    hwidInput += QSysInfo::productType();
+    hwidInput += QSysInfo::productVersion();
+
+    QByteArray hash = QCryptographicHash::hash(hwidInput.toUtf8(), QCryptographicHash::Sha256);
+    return hash.toHex();
 }

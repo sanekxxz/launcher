@@ -17,7 +17,6 @@ public:
 
 private slots:
     void on_reg_clicked();
-
     void on_exit_reg_clicked();
 
 private:

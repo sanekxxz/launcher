@@ -1,4 +1,5 @@
 #include "info_profile.h"
+#include "main.h"
 #include "ui_info_profile.h"
 #include <QSqlQueryModel>
 #include <QSqlRecord>
@@ -20,6 +21,7 @@ void info_profile::slot(QString name)
     ui->profil_login->setText(name);
     QString slot_name = name;
     QSqlQueryModel model;
+    QString hwid = generateHWID();
     model.setQuery("SELECT * FROM launcher");
     for (int i = 0; i < model.rowCount(); ++i) {
         QString id = model.record(i).value("id").toString();
@@ -30,7 +32,9 @@ void info_profile::slot(QString name)
             ui->profil_id->setText(id);
             ui->profil_login->setText(name);
             ui->profil_email->setText(email);
+            ui->profil_hwid->setText(hwid);
             //qDebug() << id << email << name << pass;
         }
     }
 }
+

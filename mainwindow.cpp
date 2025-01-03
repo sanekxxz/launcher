@@ -7,6 +7,7 @@
 #include <QSqlRecord>
 #include <QSqlQueryModel>
 #include <QSettings>
+#include <QDebug>
 #include "qtbcrypt.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +27,9 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_auto_profil_clicked()
 {
+
+    int arg1 = ui->checkBox->checkState();
+    qDebug() << arg1;
     bool profil = false;
     QString salt = QtBCrypt::generateSalt();
     QSqlQueryModel model;
@@ -52,7 +56,6 @@ void MainWindow::on_auto_profil_clicked()
 
 }
 
-
 void MainWindow::on_reg_clicked()
 {
     Windows_reg->show();
@@ -64,3 +67,4 @@ void MainWindow::on_pushButton_2_clicked()
 {
     QMessageBox::about(this, "Ошибка", "Ошибка");
 }
+

@@ -20,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     info_profile.h \
+    main.h \
     mainwindow.h \
     openwall_crypt/crypt.h \
     openwall_crypt/crypt_blowfish.h \
