@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "info_profile.h"
+#include "windows_reg.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -16,8 +17,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+signals:
+    void signal(QString);
+private slots:
+    void on_auto_profil_clicked();
+    void on_reg_clicked();
+    void on_pushButton_2_clicked();
 private:
     Ui::MainWindow *ui;
+    info_profile *Info_profile;
+    windows_reg *Windows_reg;
 };
 #endif // MAINWINDOW_H

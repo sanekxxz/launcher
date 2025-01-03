@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,16 +9,34 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    info_profile.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    openwall_crypt/crypt_blowfish.c \
+    openwall_crypt/crypt_gensalt.c \
+    openwall_crypt/wrapper.c \
+    qtbcrypt.cpp \
+    windows_reg.cpp
 
 HEADERS += \
-    mainwindow.h
+    info_profile.h \
+    mainwindow.h \
+    openwall_crypt/crypt.h \
+    openwall_crypt/crypt_blowfish.h \
+    openwall_crypt/crypt_gensalt.h \
+    openwall_crypt/ow-crypt.h \
+    qtbcrypt.h \
+    windows_reg.h
 
 FORMS += \
-    mainwindow.ui
+    info_profile.ui \
+    mainwindow.ui \
+    windows_reg.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    openwall_crypt/x86.S
