@@ -4,14 +4,12 @@
 #include <QMainWindow>
 #include "info_profile.h"
 #include "windows_reg.h"
+#include "lostpassword.h"
 #include <QtWidgets>
 #include <QDebug>
-
-/* Defining */
-#define ORGANIZATION_NAME "Monsters, Inc"
-#define ORGANIZATION_DOMAIN "Monsters.com"
-#define APPLICATION_NAME "Monsters"
-#define SETTINGS_TRAY "settings/tray"
+void saveLoginData(const QString& usernamem, int &arg1);
+QPair <QString,int> loadLoginData();
+void on_checkBox_stateChanged(int arg1);
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -30,10 +28,15 @@ signals:
 private slots:
     void on_auto_profil_clicked();
     void on_reg_clicked();
-    void on_pushButton_2_clicked();
+    void on_checkBox_stateChanged(int arg1);
+    void on_lostpassword_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     info_profile *Info_profile;
     windows_reg *Windows_reg;
+    lostpassword *Lost_Password;
 };
 #endif // MAINWINDOW_H

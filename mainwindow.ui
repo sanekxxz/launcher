@@ -6,16 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>395</width>
-    <height>302</height>
+    <width>400</width>
+    <height>340</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>340</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Launcher</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(30, 30, 30);
-font: 600 12pt &quot;Segoe UI&quot;;</string>
+   <string notr="true">background-color: #18191c;
+font: 600 12pt &quot;Segoe UI&quot;;
+color: #fff;</string>
   </property>
   <property name="documentMode">
    <bool>false</bool>
@@ -51,7 +58,8 @@ font: 600 12pt &quot;Segoe UI&quot;;</string>
        <item>
         <widget class="QLabel" name="label">
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+          <string notr="true">font-weight: 700;
+border: none;</string>
          </property>
          <property name="text">
           <string>Логин</string>
@@ -61,10 +69,8 @@ font: 600 12pt &quot;Segoe UI&quot;;</string>
        <item>
         <widget class="QLineEdit" name="login">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(45, 45, 45);
-border-style: solid;
-border-width: 1px;
-border-color: #ffffff;
+          <string notr="true">background-color:  #383838;
+border: 2px solid #b3d4fc;
 border-radius: 5px;</string>
          </property>
         </widget>
@@ -76,7 +82,8 @@ border-radius: 5px;</string>
        <item>
         <widget class="QLabel" name="label_2">
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+          <string notr="true">font-weight: 700;
+border: none;</string>
          </property>
          <property name="text">
           <string>Пароль</string>
@@ -86,10 +93,8 @@ border-radius: 5px;</string>
        <item>
         <widget class="QLineEdit" name="pass">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(45, 45, 45);
-border-style: solid;
-border-width: 1px;
-border-color: #ffffff;
+          <string notr="true">background-color:  #383838;
+border: 2px solid #b3d4fc;
 border-radius: 5px;</string>
          </property>
          <property name="echoMode">
@@ -106,12 +111,14 @@ border-radius: 5px;</string>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="auto_profil">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);
-border-style: solid;
-border-width: 1px;
-border-color: #ffffff;
-border-radius: 5px;</string>
+          <string notr="true">background-color:  #383838;
+border: 2px solid #b3d4fc;
+border-radius: 5px;
+color: #fff;</string>
          </property>
          <property name="text">
           <string>Авторизация</string>
@@ -119,13 +126,15 @@ border-radius: 5px;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="lostpassword">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);
-border-style: solid;
-border-width: 1px;
-border-color: #ffffff;
-border-radius: 5px;</string>
+          <string notr="true">background-color:  #383838;
+border: 2px solid #b3d4fc;
+border-radius: 5px;
+color: #fff;</string>
          </property>
          <property name="text">
           <string>Забыл пароль</string>
@@ -134,12 +143,14 @@ border-radius: 5px;</string>
        </item>
        <item>
         <widget class="QPushButton" name="reg">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);
-border-style: solid;
-border-width: 1px;
-border-color: #ffffff;
-border-radius: 5px;</string>
+          <string notr="true">background-color:  #383838;
+border: 2px solid #b3d4fc;
+border-radius: 5px;
+color: #fff;</string>
          </property>
          <property name="text">
           <string>Регистрация</string>
@@ -148,7 +159,33 @@ border-radius: 5px;</string>
        </item>
       </layout>
      </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">background-color:  #383838;
+border: 2px solid #b3d4fc;
+border-radius: 5px;
+color: #fff;</string>
+       </property>
+       <property name="text">
+        <string>Отправить</string>
+       </property>
+      </widget>
+     </item>
     </layout>
+   </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>260</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сохранить логин</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -156,7 +193,7 @@ border-radius: 5px;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>395</width>
+     <width>400</width>
      <height>27</height>
     </rect>
    </property>

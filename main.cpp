@@ -8,11 +8,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     createConnection();
-    //QString hwid = generateHWID();
-    //qDebug() << "HWID: в main" << hwid;
-    QCoreApplication::setOrganizationName("Monsters, Inc");
-    QCoreApplication::setOrganizationDomain("Monsters.com");
-    QCoreApplication::setApplicationName("Monsters");
     MainWindow w;
     w.show();
     return a.exec();
@@ -38,10 +33,12 @@ bool createConnection()
         QSqlQuery query;
         if (!(db.tables().contains(QLatin1String("launcher")))) {
             qDebug("db not, created...");
-            query.exec("CREATE TABLE IF NOT EXISTS launcher (id int(11) NOT NULL auto_increment PRIMARY KEY, email varchar(50) NOT NULL default '' UNIQUE KEY, name varchar(40) NOT NULL default '' UNIQUE KEY, password varchar(255) NOT NULL default '')");
+            //query.exec("CREATE TABLE IF NOT EXISTS launcher (id int(11) NOT NULL auto_increment PRIMARY KEY, email varchar(50) NOT NULL default '' UNIQUE KEY, name varchar(40) NOT NULL default '' UNIQUE KEY, password varchar(255) NOT NULL default '')");
+            query.exec("CREATE TABLE IF NOT EXISTS launcher (id int(11) NOT NULL auto_increment PRIMARY KEY,email varchar(50) NOT NULL default '' UNIQUE KEY,name varchar(40) NOT NULL default '' UNIQUE KEY,password varchar(255) NOT NULL default '',uuid CHAR(36) UNIQUE DEFAULT NULL,hwidId BIGINT DEFAULT NULL)");
+            query.exec("CREATE TRIGGER setUUID BEFORE INSERT ON launcher ""FOR EACH ROW BEGIN IF NEW.uuid IS NULL THEN SET NEW.uuid = UUID(); END IF; END; // DELIMITER ;" );
         }
-        //QSqlQuery Ex;
-        //Ex.exec("Pragma foreign_keys=on");
+        QSqlQuery Ex;
+        Ex.exec("Pragma foreign_keys=on");
         return true;
     }
     //db.close();
@@ -55,7 +52,6 @@ QString generateHWID()
     hwidInput += QSysInfo::kernelVersion();
     hwidInput += QSysInfo::productType();
     hwidInput += QSysInfo::productVersion();
-
     QByteArray hash = QCryptographicHash::hash(hwidInput.toUtf8(), QCryptographicHash::Sha256);
     return hash.toHex();
 }

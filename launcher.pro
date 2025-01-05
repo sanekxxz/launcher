@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     info_profile.cpp \
+    lostpassword.cpp \
     main.cpp \
     mainwindow.cpp \
     openwall_crypt/crypt_blowfish.c \
@@ -20,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     info_profile.h \
+    lostpassword.h \
     main.h \
     mainwindow.h \
     openwall_crypt/crypt.h \
@@ -31,6 +33,7 @@ HEADERS += \
 
 FORMS += \
     info_profile.ui \
+    lostpassword.ui \
     mainwindow.ui \
     windows_reg.ui
 

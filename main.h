@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QObject>
 #include <QSettings>
+#include <tchar.h>
+#include <Windows.h>
 QString generateHWID();
 bool createConnection();
 #endif // MAIN_H

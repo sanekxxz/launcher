@@ -1,10 +1,9 @@
 #include "windows_reg.h"
 #include "ui_windows_reg.h"
 #include "qtbcrypt.h"
-#include <QSqlQuery>
+#include "main.h"
 #include <QSqlQueryModel>
 #include <QSqlRecord>
-#include <QString>
 #include <QMessageBox>
 windows_reg::windows_reg(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +21,7 @@ void windows_reg::on_reg_clicked()
     //QString input = "@"; // Введенная строка
     QString allowedChars = "abcdefghijklmnopqrstuvwxyz" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "0123456789._-+@"; // Разрешенные символы
     QSqlQuery query;
+    //QString hwid = generateHWID();
     QString salt = QtBCrypt::generateSalt();
     QString hashedPassword = QtBCrypt::hashPassword(ui->user_password->text(), salt);
     QString name = ui->user_login->text(); //Сохраняет
@@ -60,10 +60,11 @@ void windows_reg::on_reg_clicked()
                 if(ui->user_login->text().size() == 0 || ui->user_email->text().size() == 0 || ui->user_password->text().size() == 0){
                     statusBar()->showMessage("Полня не заполнены", 3000);
                 }else{
-                    query.prepare("INSERT INTO launcher (email, name, password) VALUES (:email, :name, :password)");
+                    query.prepare("INSERT INTO launcher (email, name, password, hwidId) VALUES (:email, :name, :password, :hwidId)");
                     query.bindValue(":email", email);
                     query.bindValue(":name", name);
                     query.bindValue(":password", hashedPassword);
+                    query.bindValue(":hwidId", generateHWID());
                     query.exec();
                     QMessageBox::information(this, "Удачная регистрация", "Вы зарегистрировались");
                     this->close();
