@@ -2,6 +2,7 @@
 #define WINDOWS_REG_H
 
 #include <QMainWindow>
+#include <QLabel>
 namespace Ui {
 class windows_reg;
 }

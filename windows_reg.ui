@@ -19,8 +19,8 @@ font: 600 12pt &quot;Segoe UI&quot;;
 color: #fff;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_5">
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox">
       <property name="styleSheet">
        <string notr="true">border: none;</string>

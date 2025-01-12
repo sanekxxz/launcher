@@ -5,6 +5,7 @@
 #include <QSqlQueryModel>
 #include <QSqlRecord>
 #include <QMessageBox>
+#include <QDateTimeEdit>
 windows_reg::windows_reg(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::windows_reg)
@@ -32,8 +33,9 @@ void windows_reg::on_reg_clicked()
     for (int i = 0; i < model.rowCount(); ++i) {
         QString email = model.record(i).value("email").toString();
         QString name = model.record(i).value("name").toString();
-        if(ui->user_login->text() == name || ui->user_email->text() == email){// прервывает регистрацию если есть соовпадения
-            statusBar()->showMessage("Логин или Email занят", 3000);
+        QString hwid = model.record(i).value("hwidId").toString();
+        if(ui->user_login->text() == name || ui->user_email->text() == email || generateHWID() == hwid){// прервывает регистрацию если есть соовпадения
+            statusBar()->showMessage("Логин или Email занят,или у вас есть уже учётная запись", 3000);
             Sql_no_User = false;
             break;
         }
@@ -60,11 +62,13 @@ void windows_reg::on_reg_clicked()
                 if(ui->user_login->text().size() == 0 || ui->user_email->text().size() == 0 || ui->user_password->text().size() == 0){
                     statusBar()->showMessage("Полня не заполнены", 3000);
                 }else{
-                    query.prepare("INSERT INTO launcher (email, name, password, hwidId) VALUES (:email, :name, :password, :hwidId)");
+                    query.prepare("INSERT INTO launcher (email, name, password, hwidId, created_account_date, last_date_entry) VALUES (:email, :name, :password, :hwidId, :created_account_date, :last_date_entry)");
                     query.bindValue(":email", email);
                     query.bindValue(":name", name);
                     query.bindValue(":password", hashedPassword);
                     query.bindValue(":hwidId", generateHWID());
+                    query.bindValue(":created_account_date", QDate::currentDate());
+                    query.bindValue(":last_date_entry", QDate::currentDate());
                     query.exec();
                     QMessageBox::information(this, "Удачная регистрация", "Вы зарегистрировались");
                     this->close();

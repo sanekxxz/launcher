@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-//#include "main.h"
+#include "main.h"
 #include "QMessageBox"
 #include <QCryptographicHash>
 #include <QSqlQuery>
@@ -16,11 +16,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowFlags(Qt::Window | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+    //setWindowFlags(windowFlags() & ~(Qt::WindowMaximizeButtonHint));
     //ui->login->setStyleSheet("background-color: rgb(45, 45, 45);\nborder-style: solid;\nborder-width: 1px;\nborder-color: #ffffff;\nborder-radius: 5px;");
     Info_profile = new info_profile(); // Инициализируем второе окно
     connect(Info_profile, &info_profile::firstWindow, this, &MainWindow::show);    // подключаем к слоту запуска главного окна по кнопке во втором окне
     Windows_reg = new windows_reg(); // Инициализируем второе окнопоиск по базе данных sql qt
     connect(Windows_reg, &windows_reg::firstWindow, this, &MainWindow::show);
+
     Lost_Password = new lostpassword(); // Инициализируем второе окнопоиск по базе данных sql qt
     connect(Lost_Password, &lostpassword::firstWindow, this, &MainWindow::show);
     //Сохранение логина и проверка
@@ -48,9 +51,11 @@ void MainWindow::on_auto_profil_clicked()
     for (int i = 0; i < model.rowCount(); ++i) {
         QString name = model.record(i).value("name").toString();
         QString pass = model.record(i).value("password").toString();
-        if(ui->login->text() == name && QtBCrypt::hashPassword(ui->pass->text(),pass) == pass)
+        QString hwid = model.record(i).value("hwidId").toString();
+        if(ui->login->text() == name && QtBCrypt::hashPassword(ui->pass->text(),pass) == pass && hwid == generateHWID())
         {
             profil = true;
+            break;
         }
     }
     if(profil){
@@ -100,26 +105,3 @@ void MainWindow::on_lostpassword_clicked()
     this->close(); // Закрываем основное окно
     //MessageBox::about(this, "Ошибка", "Ошибка");
 }
-
-
-void MainWindow::on_pushButton_clicked()
-{
-    QSqlQuery query;
-    QSqlQueryModel model;
-    model.setQuery("SELECT * FROM launcher");
-    for (int i = 0; i < model.rowCount(); ++i) {
-        int id = model.record(i).value("id").toInt();
-        QString hwid = model.record(i).value("hwidId").toString();
-        qDebug() << hwid;
-        if(true)
-        {
-            query.prepare("UPDATE launcher SET hwidId = :hwidI WHERE id = :id");
-            query.bindValue(":id", id);
-            query.bindValue(":hwidId", 1);
-            if (!query.exec()) {
-                qDebug() << "Ошибка при обновлении данных: " << query.lastError().text();
-            }
-        }
-    }
-}
-
